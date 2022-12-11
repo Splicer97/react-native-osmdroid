@@ -1,7 +1,7 @@
 import {
+  Platform,
   requireNativeComponent,
   UIManager,
-  Platform,
   ViewStyle,
 } from 'react-native';
 
@@ -12,11 +12,10 @@ const LINKING_ERROR =
   '- You are not using Expo Go\n';
 
 type OsmdroidProps = {
-  color: string;
   style: ViewStyle;
 };
 
-const ComponentName = 'OsmdroidView';
+const ComponentName = 'OsmMap';
 
 export const OsmdroidView =
   UIManager.getViewManagerConfig(ComponentName) != null
