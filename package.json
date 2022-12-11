@@ -38,7 +38,11 @@
   },
   "keywords": [
     "react-native",
-    "ios",
+    "react",
+    "maps",
+    "osmdroid",
+    "open-street-maps",
+    "osm",
     "android"
   ],
   "repository": "https://github.com/Splicer97/react-native-osmdroid",
