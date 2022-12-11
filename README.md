@@ -29,18 +29,27 @@ If you are only using parts of the library, you can adjust the permissions accor
 
 Online tile provider
 
+```sh
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"  />
+```
+
 Offline tile provider and storing tiles
 
+```sh
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
 Location provider
 
+```sh
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+```
+
 Android 6.0+ devices require you have to check for "dangerous" permissions at runtime.
 osmdroid requires the following dangerous permissions:
 WRITE_EXTERNAL_STORAGE and ACCESS_COARSE_LOCATION/ACCESS_FINE_LOCATION.
-See  [OpenStreetMapViewer's implementation](https://github.com/osmdroid/osmdroid/blob/master/OpenStreetMapViewer/src/main/java/org/osmdroid/MainActivity.java#L83) or [Google Documentation on Permissions](https://developer.android.com/training/permissions/requesting)
+See [OpenStreetMapViewer's implementation](https://github.com/osmdroid/osmdroid/blob/master/OpenStreetMapViewer/src/main/java/org/osmdroid/MainActivity.java#L83) or [Google Documentation on Permissions](https://developer.android.com/training/permissions/requesting)
 
 ## Usage
 
