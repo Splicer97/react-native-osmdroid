@@ -1,6 +1,6 @@
 # react-native-osmdroid
 
-test
+This is unofficial React Native wrapper for osmdroid maps
 
 ## Installation
 
