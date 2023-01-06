@@ -28,7 +28,7 @@ export default function App() {
           longitude: 37.61556,
         }}
       >
-        <Text>123</Text>
+        <Text>Marker</Text>
         <Callout>
           <Text>Callout</Text>
         </Callout>
