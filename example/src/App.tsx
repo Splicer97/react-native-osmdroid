@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { StyleSheet, Text } from 'react-native';
 import MapView, {
+  Callout,
   Marker,
   Polygon,
   Polyline,
@@ -24,6 +25,9 @@ export default function App() {
         }}
       >
         <Text>123</Text>
+        <Callout>
+          <Text>Callout</Text>
+        </Callout>
       </Marker>
       <Polyline
         strokeColor="red"

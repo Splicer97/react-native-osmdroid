@@ -6,6 +6,8 @@ export { default as Polyline, MapPolyline } from './MapPolyline';
 export type { MapPolylineProps } from './MapPolyline';
 export { default as Polygon, MapPolygon } from './MapPolygon';
 export type { MapPolygonProps } from './MapPolygon';
+export { default as Callout, MapCallout } from './MapCallout';
+export type { MapCalloutProps } from './MapCallout';
 export * from './MapView.types';
 export * from './sharedTypes';
 export default MapView;
