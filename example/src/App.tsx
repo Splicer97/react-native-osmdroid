@@ -8,6 +8,7 @@ import MapView, {
   Polygon,
   Polyline,
   Region,
+  UrlTile,
 } from 'react-native-osmdroid';
 
 export default function App() {
@@ -17,6 +18,8 @@ export default function App() {
     latitudeDelta: 0.5,
     longitudeDelta: 0.5,
   };
+  const toner =
+    'https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=j46yoHMlBMQRgTY3lCMk';
   return (
     <MapView style={styles.container} initialRegion={initialRegion}>
       <Marker
@@ -75,6 +78,7 @@ export default function App() {
         }}
         radius={40}
       />
+      <UrlTile shouldReplaceMapContent={true} urlTemplate={toner} />
     </MapView>
   );
 }

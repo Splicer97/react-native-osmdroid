@@ -10,6 +10,8 @@ export { default as Callout, MapCallout } from './MapCallout';
 export type { MapCalloutProps } from './MapCallout';
 export { default as Circle, MapCircle } from './MapCircle';
 export type { MapCircleProps } from './MapCircle';
+export { default as UrlTile, MapUrlTile } from './MapUrlTile';
+export type { MapUrlTileProps } from './MapUrlTile';
 export * from './MapView.types';
 export * from './sharedTypes';
 export default MapView;
