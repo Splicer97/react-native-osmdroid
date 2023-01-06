@@ -1,10 +1,16 @@
 import * as React from 'react';
 
 import { StyleSheet } from 'react-native';
-import { OsmdroidView } from 'react-native-osmdroid';
+import MapView, { Region } from 'react-native-osmdroid';
 
 export default function App() {
-  return <OsmdroidView style={styles.container} />;
+  const initialRegion: Region = {
+    latitude: 55.75222,
+    longitude: 37.61556,
+    latitudeDelta: 0.5,
+    longitudeDelta: 0.5,
+  };
+  return <MapView style={styles.container} initialRegion={initialRegion} />;
 }
 
 const styles = StyleSheet.create({
