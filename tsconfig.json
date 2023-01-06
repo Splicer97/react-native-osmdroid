@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-osmdroid": ["./src/index"]
+      "@splicer97/react-native-osmdroid": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

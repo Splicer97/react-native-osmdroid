@@ -9,7 +9,7 @@ import MapView, {
   Polyline,
   Region,
   UrlTile,
-} from 'react-native-osmdroid';
+} from '@splicer97/react-native-osmdroid';
 
 export default function App() {
   const initialRegion: Region = {
