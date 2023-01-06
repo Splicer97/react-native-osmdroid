@@ -19,7 +19,9 @@ import type {
   MapPressEvent,
   Details,
   UserLocationChangeEvent,
+  ChangeEvent,
 } from './MapView.types';
+import type { MapViewNativeComponentType } from './MapViewNativeComponent';
 import type {
   Point,
   Region,
@@ -31,12 +33,31 @@ import type {
   MarkerPressEvent,
   MarkerSelectEvent,
 } from './sharedTypes';
+import type { Modify } from './sharedTypesInternal';
 
 const LINKING_ERROR =
   `The package 'react-native-osmdroid' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go';
+
+type ModifiedProps = Modify<
+  MapViewProps,
+  {
+    region?: MapViewProps['region'] | null;
+    initialRegion?: MapViewProps['initialRegion'] | null;
+  }
+>;
+
+export type NativeProps = Omit<
+  ModifiedProps,
+  'customMapStyle' | 'onRegionChange' | 'onRegionChangeComplete'
+> & {
+  ref: React.RefObject<MapViewNativeComponentType>;
+  customMapStyleString?: string;
+  handlePanDrag?: boolean;
+  onChange?: (e: ChangeEvent) => void;
+};
 
 export type MapViewProps = ViewProps & {
   /**
