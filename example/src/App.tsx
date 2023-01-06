@@ -3,6 +3,7 @@ import * as React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import MapView, {
   Callout,
+  Circle,
   Marker,
   Polygon,
   Polyline,
@@ -64,6 +65,15 @@ export default function App() {
             longitude: 37.62558,
           },
         ]}
+      />
+      <Circle
+        strokeWidth={40}
+        strokeColor="white"
+        center={{
+          latitude: 55.72324,
+          longitude: 37.62358,
+        }}
+        radius={40}
       />
     </MapView>
   );
