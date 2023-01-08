@@ -736,7 +736,7 @@ class MapView extends React.Component<MapViewProps> {
 
   getCamera(): Promise<Camera> {
     if (Platform.OS === 'android') {
-      return NativeModules.AirMapModule.getCamera(this._getHandle());
+      return NativeModules.OsmMapModule.getCamera(this._getHandle());
     } else if (Platform.OS === 'ios') {
       return this._runCommand('getCamera', []);
     }
@@ -815,7 +815,7 @@ class MapView extends React.Component<MapViewProps> {
    */
   async getMapBoundaries(): Promise<BoundingBox> {
     if (Platform.OS === 'android') {
-      return await NativeModules.AirMapModule.getMapBoundaries(
+      return await NativeModules.OsmMapModule.getMapBoundaries(
         this._getHandle()
       );
     } else if (Platform.OS === 'ios') {
@@ -869,7 +869,7 @@ class MapView extends React.Component<MapViewProps> {
 
     // Call native function
     if (Platform.OS === 'android') {
-      return NativeModules.AirMapModule.takeSnapshot(this._getHandle(), config);
+      return NativeModules.OsmMapModule.takeSnapshot(this._getHandle(), config);
     } else if (Platform.OS === 'ios') {
       return new Promise((resolve, reject) => {
         this._runCommand('takeSnapshot', [
@@ -903,7 +903,7 @@ class MapView extends React.Component<MapViewProps> {
    */
   addressForCoordinate(coordinate: LatLng): Promise<Address> {
     if (Platform.OS === 'android') {
-      return NativeModules.AirMapModule.getAddressFromCoordinates(
+      return NativeModules.OsmMapModule.getAddressFromCoordinates(
         this._getHandle(),
         coordinate
       );
@@ -924,7 +924,7 @@ class MapView extends React.Component<MapViewProps> {
    */
   pointForCoordinate(coordinate: LatLng): Promise<Point> {
     if (Platform.OS === 'android') {
-      return NativeModules.AirMapModule.pointForCoordinate(
+      return NativeModules.OsmMapModule.pointForCoordinate(
         this._getHandle(),
         coordinate
       );
@@ -945,7 +945,7 @@ class MapView extends React.Component<MapViewProps> {
    */
   coordinateForPoint(point: Point): Promise<LatLng> {
     if (Platform.OS === 'android') {
-      return NativeModules.AirMapModule.coordinateForPoint(
+      return NativeModules.OsmMapModule.coordinateForPoint(
         this._getHandle(),
         point
       );

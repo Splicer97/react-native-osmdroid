@@ -516,6 +516,16 @@ public class OsmMapView extends MapView implements MapView.OnFirstLayoutListener
         }
     }
 
+  public double[][] getMapBoundaries() {
+    OsmMapView mapView = OsmMapView.this;
+    BoundingBox bounds = mapView.getBoundingBox();
+
+    return new double[][] {
+      {bounds.getLonEast(), bounds.getLatNorth()},
+      {bounds.getLonWest(), bounds.getLatSouth()}
+    };
+  }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         scaleDetector.onTouchEvent(ev);

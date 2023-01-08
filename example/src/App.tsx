@@ -20,11 +20,24 @@ export default function App() {
   };
   const toner =
     'https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=j46yoHMlBMQRgTY3lCMk';
+  const mapRef = React.useRef<MapView>();
 
   return (
-    <MapView
-      onRegionChange={(region) => {
-        console.log('🚀 ~ file: App.tsx:88 ~ App ~ region', region);
+    <MapView.Animated
+      ref={mapRef}
+      onMapReady={async () => {
+        // const mapBoundaries = await mapRef.current?.getMapBoundaries();
+        // console.log(
+        //   '🚀 ~ file: App.tsx:30 ~ onMapReady={ ~ mapBoundaries',
+        //   mapBoundaries
+        // );
+      }}
+      onRegionChangeComplete={async () => {
+        // const mapBoundaries = await mapRef.current?.getMapBoundaries();
+        // console.log(
+        //   '🚀 ~ file: App.tsx:30 ~ onMapReady={ ~ mapBoundaries',
+        //   mapBoundaries
+        // );
       }}
       style={styles.container}
       initialRegion={initialRegion}
@@ -86,7 +99,7 @@ export default function App() {
         radius={40}
       />
       <UrlTile shouldReplaceMapContent={true} urlTemplate={toner} />
-    </MapView>
+    </MapView.Animated>
   );
 }
 
