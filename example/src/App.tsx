@@ -20,8 +20,15 @@ export default function App() {
   };
   const toner =
     'https://api.maptiler.com/maps/toner-v2/{z}/{x}/{y}.png?key=j46yoHMlBMQRgTY3lCMk';
+
   return (
-    <MapView style={styles.container} initialRegion={initialRegion}>
+    <MapView
+      onRegionChange={(region) => {
+        console.log('🚀 ~ file: App.tsx:88 ~ App ~ region', region);
+      }}
+      style={styles.container}
+      initialRegion={initialRegion}
+    >
       <Marker
         coordinate={{
           latitude: 55.75222,

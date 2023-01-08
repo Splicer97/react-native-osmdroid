@@ -1,4 +1,4 @@
-import { MapView, MapViewProps } from './MapView';
+import MapView, { MapViewProps } from './MapView';
 export type { MapViewProps };
 import Marker from './MapMarker';
 export { MapMarker } from './MapMarker';

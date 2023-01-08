@@ -1,4 +1,8 @@
+import React from 'react';
 import {
+  Animated,
+  findNodeHandle,
+  NativeModules,
   NativeSyntheticEvent,
   Platform,
   requireNativeComponent,
@@ -20,8 +24,13 @@ import type {
   Details,
   UserLocationChangeEvent,
   ChangeEvent,
+  NativeCommandName,
+  Address,
+  BoundingBox,
+  FitToOptions,
+  SnapshotOptions,
 } from './MapView.types';
-import type { MapViewNativeComponentType } from './MapViewNativeComponent';
+import { Commands, MapViewNativeComponentType } from './MapViewNativeComponent';
 import type {
   Point,
   Region,
@@ -32,6 +41,8 @@ import type {
   MarkerDragStartEndEvent,
   MarkerPressEvent,
   MarkerSelectEvent,
+  Frame,
+  LatLng,
 } from './sharedTypes';
 import type { Modify } from './sharedTypesInternal';
 
@@ -676,11 +687,381 @@ export type MapViewProps = ViewProps & {
   zoomTapEnabled?: boolean;
 };
 
-const ComponentName = 'OsmMap';
+class MapView extends React.Component<MapViewProps> {
+  static Animated: Animated.AnimatedComponent<typeof MapView>;
+  private map: NativeProps['ref'];
 
-export const MapView =
-  UIManager.getViewManagerConfig(ComponentName) != null
-    ? requireNativeComponent<MapViewProps>(ComponentName)
-    : () => {
-        throw new Error(LINKING_ERROR);
-      };
+  constructor(props: MapViewProps) {
+    super(props);
+
+    this.map = React.createRef<MapViewNativeComponentType>();
+
+    this._onMapReady = this._onMapReady.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  /**
+   * @deprecated Will be removed in v2.0.0, as setNativeProps is not a thing in fabric.
+   * See https://reactnative.dev/docs/new-architecture-library-intro#migrating-off-setnativeprops
+   */
+  setNativeProps(props: Partial<NativeProps>) {
+    console.warn(
+      'setNativeProps is deprecated and will be removed in next major release'
+    );
+    // @ts-ignore
+    this.map.current?.setNativeProps(props);
+  }
+
+  private _onMapReady() {
+    const { onMapReady } = this.props;
+    this.setState({ isReady: true }, () => {
+      if (onMapReady) {
+        onMapReady();
+      }
+    });
+  }
+
+  private _onChange({ nativeEvent }: ChangeEvent) {
+    const isGesture = nativeEvent.isGesture;
+    const details = { isGesture };
+
+    if (nativeEvent.continuous) {
+      if (this.props.onRegionChange) {
+        this.props.onRegionChange(nativeEvent.region, details);
+      }
+    } else if (this.props.onRegionChangeComplete) {
+      this.props.onRegionChangeComplete(nativeEvent.region, details);
+    }
+  }
+
+  getCamera(): Promise<Camera> {
+    if (Platform.OS === 'android') {
+      return NativeModules.AirMapModule.getCamera(this._getHandle());
+    } else if (Platform.OS === 'ios') {
+      return this._runCommand('getCamera', []);
+    }
+    return Promise.reject('getCamera not supported on this platform');
+  }
+
+  setCamera(camera: Partial<Camera>) {
+    if (this.map.current) {
+      Commands.setCamera(this.map.current, camera);
+    }
+  }
+
+  animateCamera(camera: Partial<Camera>, opts?: { duration?: number }) {
+    if (this.map.current) {
+      Commands.animateCamera(
+        this.map.current,
+        camera,
+        opts?.duration ? opts.duration : 500
+      );
+    }
+  }
+
+  animateToRegion(region: Region, duration: number = 500) {
+    if (this.map.current) {
+      Commands.animateToRegion(this.map.current, region, duration);
+    }
+  }
+
+  fitToElements(options: FitToOptions = {}) {
+    if (this.map.current) {
+      const {
+        edgePadding = { top: 0, right: 0, bottom: 0, left: 0 },
+        animated = true,
+      } = options;
+
+      Commands.fitToElements(this.map.current, edgePadding, animated);
+    }
+  }
+
+  fitToSuppliedMarkers(markers: string[], options: FitToOptions = {}) {
+    if (this.map.current) {
+      const {
+        edgePadding = { top: 0, right: 0, bottom: 0, left: 0 },
+        animated = true,
+      } = options;
+
+      Commands.fitToSuppliedMarkers(
+        this.map.current,
+        markers,
+        edgePadding,
+        animated
+      );
+    }
+  }
+
+  fitToCoordinates(coordinates: LatLng[] = [], options: FitToOptions = {}) {
+    if (this.map.current) {
+      const {
+        edgePadding = { top: 0, right: 0, bottom: 0, left: 0 },
+        animated = true,
+      } = options;
+
+      Commands.fitToCoordinates(
+        this.map.current,
+        coordinates,
+        edgePadding,
+        animated
+      );
+    }
+  }
+
+  /**
+   * Get visible boudaries
+   *
+   * @return Promise Promise with the bounding box ({ northEast: <LatLng>, southWest: <LatLng> })
+   */
+  async getMapBoundaries(): Promise<BoundingBox> {
+    if (Platform.OS === 'android') {
+      return await NativeModules.AirMapModule.getMapBoundaries(
+        this._getHandle()
+      );
+    } else if (Platform.OS === 'ios') {
+      return await this._runCommand('getMapBoundaries', []);
+    }
+    return Promise.reject('getMapBoundaries not supported on this platform');
+  }
+
+  setMapBoundaries(northEast: LatLng, southWest: LatLng) {
+    if (this.map.current) {
+      Commands.setMapBoundaries(this.map.current, northEast, southWest);
+    }
+  }
+
+  setIndoorActiveLevelIndex(activeLevelIndex: number) {
+    if (this.map.current) {
+      Commands.setIndoorActiveLevelIndex(this.map.current, activeLevelIndex);
+    }
+  }
+
+  /**
+   * Takes a snapshot of the map and saves it to a picture
+   * file or returns the image as a base64 encoded string.
+   *
+   * @param args Configuration options
+   * @param [args.width] Width of the rendered map-view (when omitted actual view width is used).
+   * @param [args.height] Height of the rendered map-view (when omitted actual height is used).
+   * @param [args.region] Region to render (Only supported on iOS).
+   * @param [args.format] Encoding format ('png', 'jpg') (default: 'png').
+   * @param [args.quality] Compression quality (only used for jpg) (default: 1.0).
+   * @param [args.result] Result format ('file', 'base64') (default: 'file').
+   *
+   * @return Promise Promise with either the file-uri or base64 encoded string
+   */
+  takeSnapshot(args: SnapshotOptions): Promise<string> {
+    // Sanitize inputs
+    const config = {
+      width: args.width || 0,
+      height: args.height || 0,
+      region: args.region || {},
+      format: args.format || 'png',
+      quality: args.quality || 1.0,
+      result: args.result || 'file',
+    };
+    if (config.format !== 'png' && config.format !== 'jpg') {
+      throw new Error('Invalid format specified');
+    }
+    if (config.result !== 'file' && config.result !== 'base64') {
+      throw new Error('Invalid result specified');
+    }
+
+    // Call native function
+    if (Platform.OS === 'android') {
+      return NativeModules.AirMapModule.takeSnapshot(this._getHandle(), config);
+    } else if (Platform.OS === 'ios') {
+      return new Promise((resolve, reject) => {
+        this._runCommand('takeSnapshot', [
+          config.width,
+          config.height,
+          config.region,
+          config.format,
+          config.quality,
+          config.result,
+          (err: unknown, snapshot: string) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(snapshot);
+            }
+          },
+        ]);
+      });
+    }
+    return Promise.reject('takeSnapshot not supported on this platform');
+  }
+
+  /**
+   * Convert a coordinate to address by using default Geocoder
+   *
+   * @param coordinate Coordinate
+   * @param [coordinate.latitude] Latitude
+   * @param [coordinate.longitude] Longitude
+   *
+   * @return Promise with return type Address
+   */
+  addressForCoordinate(coordinate: LatLng): Promise<Address> {
+    if (Platform.OS === 'android') {
+      return NativeModules.AirMapModule.getAddressFromCoordinates(
+        this._getHandle(),
+        coordinate
+      );
+    } else if (Platform.OS === 'ios') {
+      return this._runCommand('getAddressFromCoordinates', [coordinate]);
+    }
+    return Promise.reject('getAddress not supported on this platform');
+  }
+
+  /**
+   * Convert a map coordinate to user-space point
+   *
+   * @param coordinate Coordinate
+   * @param [coordinate.latitude] Latitude
+   * @param [coordinate.longitude] Longitude
+   *
+   * @return Promise Promise with the point ({ x: Number, y: Number })
+   */
+  pointForCoordinate(coordinate: LatLng): Promise<Point> {
+    if (Platform.OS === 'android') {
+      return NativeModules.AirMapModule.pointForCoordinate(
+        this._getHandle(),
+        coordinate
+      );
+    } else if (Platform.OS === 'ios') {
+      return this._runCommand('pointForCoordinate', [coordinate]);
+    }
+    return Promise.reject('pointForCoordinate not supported on this platform');
+  }
+
+  /**
+   * Convert a user-space point to a map coordinate
+   *
+   * @param point Point
+   * @param [point.x] X
+   * @param [point.x] Y
+   *
+   * @return Promise Promise with the coordinate ({ latitude: Number, longitude: Number })
+   */
+  coordinateForPoint(point: Point): Promise<LatLng> {
+    if (Platform.OS === 'android') {
+      return NativeModules.AirMapModule.coordinateForPoint(
+        this._getHandle(),
+        point
+      );
+    } else if (Platform.OS === 'ios') {
+      return this._runCommand('coordinateForPoint', [point]);
+    }
+    return Promise.reject('coordinateForPoint not supported on this platform');
+  }
+
+  /**
+   * Get markers' centers and frames in user-space coordinates
+   *
+   * @param onlyVisible boolean true to include only visible markers, false to include all
+   *
+   * @return Promise Promise with { <identifier>: { point: Point, frame: Frame } }
+   */
+  getMarkersFrames(onlyVisible: boolean = false): Promise<{
+    [key: string]: { point: Point; frame: Frame };
+  }> {
+    if (Platform.OS === 'ios') {
+      return this._runCommand('getMarkersFrames', [onlyVisible]);
+    }
+    return Promise.reject('getMarkersFrames not supported on this platform');
+  }
+
+  /**
+   * Get bounding box from region
+   *
+   * @param region Region
+   *
+   * @return Object Object bounding box ({ northEast: <LatLng>, southWest: <LatLng> })
+   */
+  boundingBoxForRegion(region: Region): BoundingBox {
+    return {
+      northEast: {
+        latitude: region.latitude + region.latitudeDelta / 2,
+        longitude: region.longitude + region.longitudeDelta / 2,
+      },
+      southWest: {
+        latitude: region.latitude - region.latitudeDelta / 2,
+        longitude: region.longitude - region.longitudeDelta / 2,
+      },
+    };
+  }
+
+  private _mapManagerCommand(name: NativeCommandName) {
+    return NativeModules.OsmMapManager[name];
+  }
+
+  private _getHandle() {
+    return findNodeHandle(this.map.current);
+  }
+
+  private _runCommand(name: NativeCommandName, args: any[]) {
+    if (Platform.OS === 'ios') {
+      return this._mapManagerCommand(name)(this._getHandle(), ...args);
+    } else {
+      return Promise.reject(`Invalid platform was passed: ${Platform.OS}`);
+    }
+  }
+
+  render() {
+    const props: NativeProps = {
+      ref: this.map,
+      style: this.props.style,
+      onChange: this._onChange,
+      initialRegion: this.props.initialRegion || null,
+      ...this.props,
+    };
+    // let props: NativeProps;
+
+    // if (this.state.isReady) {
+    //   props = {
+    //     region: null,
+    //     initialRegion: null,
+    //     onChange: this._onChange,
+    //     onMapReady: this._onMapReady,
+    //     ref: this.map,
+    //     customMapStyleString: this.props.customMapStyle
+    //       ? JSON.stringify(this.props.customMapStyle)
+    //       : undefined,
+    //     ...this.props,
+    //   };
+
+    //   if (props.onPanDrag) {
+    //     props.handlePanDrag = !!props.onPanDrag;
+    //   }
+    // } else {
+    //   props = {
+    //     style: this.props.style,
+    //     region: null,
+    //     initialRegion: this.props.initialRegion || null,
+    //     initialCamera: this.props.initialCamera,
+    //     ref: this.map,
+    //     onChange: this._onChange,
+    //     onMapReady: this._onMapReady,
+    //     onLayout: this.props.onLayout,
+    //     customMapStyleString: this.props.customMapStyle
+    //       ? JSON.stringify(this.props.customMapStyle)
+    //       : undefined,
+    //   };
+    // }
+
+    const ComponentName = 'OsmMap';
+    const OsmMap =
+      UIManager.getViewManagerConfig(ComponentName) != null
+        ? requireNativeComponent<NativeProps>(ComponentName)
+        : () => {
+            throw new Error(LINKING_ERROR);
+          };
+    return <OsmMap {...props} />;
+  }
+}
+
+export const AnimatedMapView = Animated.createAnimatedComponent(MapView);
+
+MapView.Animated = AnimatedMapView;
+
+export default MapView;
