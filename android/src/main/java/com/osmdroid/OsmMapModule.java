@@ -1,6 +1,7 @@
 package com.osmdroid;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -17,6 +18,7 @@ import com.facebook.react.uimanager.UIManagerModule;
 import java.io.Closeable;
 import java.io.IOException;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -245,11 +247,10 @@ public class OsmMapModule extends ReactContextBaseJavaModule {
     final ReactApplicationContext context = getReactApplicationContext();
 
     UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-    uiManager.addUIBlock(new UIBlock()
-    {
+    assert uiManager != null;
+    uiManager.addUIBlock(new UIBlock() {
       @Override
-      public void execute(NativeViewHierarchyManager nvhm)
-      {
+      public void execute(NativeViewHierarchyManager nvhm) {
         OsmMapView view = (OsmMapView) nvhm.resolveView(tag);
         if (view == null) {
           promise.reject("AirMapView not found");
@@ -269,7 +270,6 @@ public class OsmMapModule extends ReactContextBaseJavaModule {
 
         coordinates.putMap("northEast", northEastHash);
         coordinates.putMap("southWest", southWestHash);
-
         promise.resolve(coordinates);
       }
     });

@@ -818,8 +818,6 @@ class MapView extends React.Component<MapViewProps> {
       return await NativeModules.OsmMapModule.getMapBoundaries(
         this._getHandle()
       );
-    } else if (Platform.OS === 'ios') {
-      return await this._runCommand('getMapBoundaries', []);
     }
     return Promise.reject('getMapBoundaries not supported on this platform');
   }
