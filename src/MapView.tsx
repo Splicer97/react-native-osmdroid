@@ -1047,18 +1047,18 @@ class MapView extends React.Component<MapViewProps> {
     //   };
     // }
 
-    const ComponentName = 'OsmMap';
-    const OsmMap =
-      UIManager.getViewManagerConfig(ComponentName) != null
-        ? requireNativeComponent<NativeProps>(ComponentName)
-        : () => {
-            throw new Error(LINKING_ERROR);
-          };
     return <OsmMap {...props} />;
   }
 }
+const ComponentName = 'OsmMap';
 
-export const AnimatedMapView = Animated.createAnimatedComponent(MapView);
+const OsmMap =
+  UIManager.getViewManagerConfig(ComponentName) != null
+    ? requireNativeComponent<NativeProps>(ComponentName)
+    : () => {
+        throw new Error(LINKING_ERROR);
+      };
+const AnimatedMapView = Animated.createAnimatedComponent(MapView);
 
 MapView.Animated = AnimatedMapView;
 
