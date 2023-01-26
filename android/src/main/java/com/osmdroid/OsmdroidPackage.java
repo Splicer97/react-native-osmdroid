@@ -17,7 +17,6 @@ public class OsmdroidPackage implements ReactPackage {
 
   @Override
   public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-    OsmdroidViewManager osmdroidViewManager = new OsmdroidViewManager();
     OsmMapCalloutManager osmCalloutManager = new OsmMapCalloutManager();
     OsmMapMarkerManager osmMarkerManager = new OsmMapMarkerManager();
     OsmMapPolylineManager osmPolylineManager = new OsmMapPolylineManager(reactContext);
@@ -27,7 +26,6 @@ public class OsmdroidPackage implements ReactPackage {
     OsmMapUrlTileManager osmUrlTileManager = new OsmMapUrlTileManager();
     OsmMapFileTileManager osmMapFileTileManager = new OsmMapFileTileManager();
     return Arrays.<ViewManager>asList(
-      osmdroidViewManager,
       osmCalloutManager,
       osmMarkerManager,
       osmPolylineManager,
