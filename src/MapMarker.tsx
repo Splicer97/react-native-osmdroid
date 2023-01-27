@@ -174,7 +174,7 @@ export type NativeProps = Modify<
   ref: React.RefObject<MapMarkerNativeComponentType>;
 };
 
-export class MapMarker extends React.Component<MapMarkerProps> {
+class MapMarker extends React.Component<MapMarkerProps> {
   // declaration only, as they are set through decorateMap
 
   getNativeComponent!: () => NativeComponent<NativeProps>;
@@ -279,6 +279,8 @@ const styles = StyleSheet.create({
 });
 
 MapMarker.Animated = Animated.createAnimatedComponent(MapMarker);
+
 const OsmMapMarker: NativeComponent<NativeProps> =
   requireNativeComponent<NativeProps>('OsmMapMarker');
+
 export default MapMarker;
