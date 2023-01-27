@@ -479,7 +479,6 @@ class MapView extends React.Component<MapViewProps, State> {
   animateToRegion(region: Region, duration: number = 500) {
     if (this.map.current) {
       Commands.animateToRegion(this.map.current, region, duration);
-      console.log('animateToRegion');
     }
   }
 
