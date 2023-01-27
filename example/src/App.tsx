@@ -22,7 +22,7 @@ export default function App() {
   const mapRef = React.useRef<MapView>();
   const zelenograd: Region = {
     latitude: 55.9825,
-    longitude: 40.18139,
+    longitude: 37.18139,
     latitudeDelta: 0.5,
     longitudeDelta: 0.5,
   };
