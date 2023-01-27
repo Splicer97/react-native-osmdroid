@@ -274,4 +274,28 @@ public class OsmMapModule extends ReactContextBaseJavaModule {
       }
     });
   }
+
+  //   @ReactMethod
+  // public void enableLatestRenderer(final Promise promise) {
+  //   final ReactApplicationContext context = getReactApplicationContext();
+
+  //   UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
+  //   uiManager.addUIBlock(new UIBlock()
+  //   {
+  //     @Override
+  //     public void execute(NativeViewHierarchyManager nvhm)
+  //     {
+  //       MapsInitializer.initialize(context, MapsInitializer.Renderer.LATEST, new OnMapsSdkInitializedCallback() {
+  //         @Override
+  //         public void onMapsSdkInitialized(@NonNull MapsInitializer.Renderer renderer) {
+  //           Log.d("AirMapRenderer", renderer.toString());
+  //           promise.resolve(renderer.toString());
+  //         }
+  //       });
+  //     }
+  //   });
+  // }
 }
+
+
+
