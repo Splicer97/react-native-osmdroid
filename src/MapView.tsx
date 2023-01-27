@@ -479,6 +479,7 @@ class MapView extends React.Component<MapViewProps, State> {
   animateToRegion(region: Region, duration: number = 500) {
     if (this.map.current) {
       Commands.animateToRegion(this.map.current, region, duration);
+      console.log('animateToRegion');
     }
   }
 
@@ -705,7 +706,7 @@ const AnimatedMapView = Animated.createAnimatedComponent(MapView);
 MapView.Animated = AnimatedMapView;
 
 export const enableLatestRenderer = () => {
-  return NativeModules.AirMapModule.enableLatestRenderer();
+  return NativeModules.OsmMapModule.enableLatestRenderer();
 };
 
 export default MapView;

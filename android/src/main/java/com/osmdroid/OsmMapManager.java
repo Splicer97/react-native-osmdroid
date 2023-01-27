@@ -208,7 +208,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     }
 
     @Override
-    public void receiveCommand(OsmMapView view, int commandId, @Nullable ReadableArray args) {
+    public void receiveCommand(OsmMapView view, String commandId, @Nullable ReadableArray args) {
         Integer duration;
         Double lat;
         Double lng;
@@ -219,18 +219,18 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
         ReadableMap camera;
 
         switch (commandId) {
-            case SET_CAMERA:
+            case "setCamera":
                 camera = args.getMap(0);
                 view.animateToCamera(camera, 0);
                 break;
 
-            case ANIMATE_CAMERA:
+            case "animateCamera":
                 camera = args.getMap(0);
                 duration = args.getInt(1);
                 view.animateToCamera(camera, duration);
                 break;
 
-            case ANIMATE_TO_REGION:
+            case "animateToRegion":
                 region = args.getMap(0);
                 duration = args.getInt(1);
                 lng = region.getDouble("longitude");
@@ -244,7 +244,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
                 view.animateToRegion(bounds, duration);
                 break;
 
-            case ANIMATE_TO_COORDINATE:
+            case "animateToCoordinate":
                 region = args.getMap(0);
                 duration = args.getInt(1);
                 lng = region.getDouble("longitude");
@@ -252,24 +252,22 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
                 view.animateToCoordinate(new GeoPoint(lat, lng), duration);
                 break;
 
-            case ANIMATE_TO_VIEWING_ANGLE:
-                // not supported!
-                break;
 
-            case ANIMATE_TO_BEARING:
+
+            case "animateToBearing":
                 bearing = (float) args.getDouble(0);
                 duration = args.getInt(1);
                 view.animateToBearing(bearing, duration);
                 break;
 
-            case FIT_TO_ELEMENTS:
+            case "fitToElements":
                 view.fitToElements(args.getBoolean(0));
                 break;
 
-            case FIT_TO_SUPPLIED_MARKERS:
+            case "fitToSuppliedMarkers":
                 view.fitToSuppliedMarkers(args.getArray(0), args.getMap(1), args.getBoolean(2));
                 break;
-            case FIT_TO_COORDINATES:
+            case "fitToCoordinates":
                 view.fitToCoordinates(args.getArray(0), args.getMap(1), args.getBoolean(2));
                 break;
         }
