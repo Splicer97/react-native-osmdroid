@@ -98,7 +98,7 @@ export default function App() {
         }}
         radius={40}
       />
-      <UrlTile shouldReplaceMapContent={true} urlTemplate={toner} />
+      <UrlTile urlTemplate={toner} />
     </MapView.Animated>
   );
 }
