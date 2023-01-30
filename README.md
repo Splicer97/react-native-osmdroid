@@ -1,4 +1,4 @@
-# react-native-osmdroid
+# react-native-osmdroid [![npm version](https://img.shields.io/npm/v/@splicer97/react-native-osmdroid.svg?style=flat)](https://www.npmjs.com/package/@splicer97/react-native-osmdroid) [![Downloads](https://img.shields.io/npm/dm/react-native-fast-image.svg)](http://www.npmtrends.com/react-native-fast-image)
 
 This is unofficial React Native wrapper for osmdroid maps
 
