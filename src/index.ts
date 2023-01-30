@@ -15,3 +15,4 @@ export * from './MapView.types';
 export * from './sharedTypes';
 export default MapView;
 export { Marker, Polyline, Polygon };
+export { default as AnimatedRegion } from './AnimatedRegion';

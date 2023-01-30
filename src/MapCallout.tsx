@@ -1,10 +1,5 @@
 import * as React from 'react';
 import { requireNativeComponent, StyleSheet, ViewProps } from 'react-native';
-import type {
-  MapManagerCommand,
-  NativeComponent,
-  UIManagerCommand,
-} from './decorateMapComponent';
 import type { CalloutPressEvent } from './sharedTypes';
 
 export type MapCalloutProps = ViewProps & {
@@ -26,10 +21,6 @@ export type MapCalloutProps = ViewProps & {
 type NativeProps = MapCalloutProps;
 
 class MapCallout extends React.Component<MapCalloutProps> {
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   render() {
     const { tooltip = false } = this.props;
     return (

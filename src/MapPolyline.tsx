@@ -5,11 +5,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import type {
-  NativeComponent,
-  MapManagerCommand,
-  UIManagerCommand,
-} from './decorateMapComponent';
+import type { NativeComponent } from './decorateMapComponent';
 import type { LatLng, LineCapType, Point } from './sharedTypes';
 
 export type MapPolylineProps = ViewProps & {
@@ -90,10 +86,6 @@ type PolylinePressEvent = NativeSyntheticEvent<{
 type NativeProps = MapPolylineProps & { ref: React.RefObject<View> };
 
 class MapPolyline extends React.Component<MapPolylineProps> {
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   private polyline: NativeProps['ref'];
 
   constructor(props: MapPolylineProps) {

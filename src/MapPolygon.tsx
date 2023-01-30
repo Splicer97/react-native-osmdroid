@@ -5,11 +5,7 @@ import {
   View,
   ViewProps,
 } from 'react-native';
-import type {
-  NativeComponent,
-  MapManagerCommand,
-  UIManagerCommand,
-} from './decorateMapComponent';
+import type { NativeComponent } from './decorateMapComponent';
 import type { LatLng, Point } from './sharedTypes';
 
 export type MapPolygonProps = ViewProps & {
@@ -77,10 +73,6 @@ type PolygonPressEvent = NativeSyntheticEvent<{
 type NativeProps = MapPolygonProps & { ref: React.RefObject<View> };
 
 class MapPolygon extends React.Component<MapPolygonProps> {
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   private polygon: NativeProps['ref'];
 
   constructor(props: MapPolygonProps) {

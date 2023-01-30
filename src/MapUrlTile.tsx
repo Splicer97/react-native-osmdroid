@@ -1,10 +1,5 @@
 import * as React from 'react';
 
-import type {
-  NativeComponent,
-  MapManagerCommand,
-  UIManagerCommand,
-} from './decorateMapComponent';
 import { requireNativeComponent, ViewProps } from 'react-native';
 
 export type MapUrlTileProps = ViewProps & {
@@ -95,10 +90,6 @@ export type MapUrlTileProps = ViewProps & {
 type NativeProps = MapUrlTileProps;
 
 class MapUrlTile extends React.Component<MapUrlTileProps> {
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   render() {
     return <OsmMapUrlTile {...this.props} />;
   }

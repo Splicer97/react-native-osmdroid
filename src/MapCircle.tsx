@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { requireNativeComponent, View, ViewProps } from 'react-native';
-import type {
-  NativeComponent,
-  MapManagerCommand,
-  UIManagerCommand,
-} from './decorateMapComponent';
+import type { NativeComponent } from './decorateMapComponent';
 import type { LatLng } from './sharedTypes';
 
 export type MapCircleProps = ViewProps & {
@@ -45,10 +41,6 @@ export type MapCircleProps = ViewProps & {
 type NativeProps = MapCircleProps & { ref: React.RefObject<View> };
 
 class MapCircle extends React.Component<MapCircleProps> {
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   private circle: NativeProps['ref'];
 
   constructor(props: MapCircleProps) {

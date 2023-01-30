@@ -9,11 +9,7 @@ import {
   requireNativeComponent,
 } from 'react-native';
 
-import type {
-  MapManagerCommand,
-  NativeComponent,
-  UIManagerCommand,
-} from './decorateMapComponent';
+import type { NativeComponent } from './decorateMapComponent';
 import {
   Commands,
   MapMarkerNativeComponentType,
@@ -175,12 +171,6 @@ export type NativeProps = Modify<
 };
 
 class MapMarker extends React.Component<MapMarkerProps> {
-  // declaration only, as they are set through decorateMap
-
-  getNativeComponent!: () => NativeComponent<NativeProps>;
-  getMapManagerCommand!: (name: string) => MapManagerCommand;
-  getUIManagerCommand!: (name: string) => UIManagerCommand;
-
   static Animated: Animated.AnimatedComponent<typeof MapMarker>;
 
   private marker: NativeProps['ref'];
