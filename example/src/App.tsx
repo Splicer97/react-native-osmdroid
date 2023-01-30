@@ -33,20 +33,6 @@ export default function App() {
     <View style={{ flex: 1, position: 'relative' }}>
       <MapView.Animated
         ref={mapRef}
-        onMapReady={async () => {
-          // const mapBoundaries = await mapRef.current?.getMapBoundaries();
-          // console.log(
-          //   '🚀 ~ file: App.tsx:30 ~ onMapReady={ ~ mapBoundaries',
-          //   mapBoundaries
-          // );
-        }}
-        onRegionChangeComplete={async () => {
-          const mapBoundaries = await mapRef.current?.getMapBoundaries();
-          console.log(
-            '🚀 ~ file: App.tsx:30 ~ onMapReady={ ~ mapBoundaries',
-            mapBoundaries
-          );
-        }}
         style={styles.container}
         initialRegion={initialRegion}
       >

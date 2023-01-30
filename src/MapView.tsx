@@ -11,17 +11,9 @@ import {
 } from 'react-native';
 import type {
   Camera,
-  EdgePadding,
-  MapType,
-  IndoorBuildingEvent,
-  IndoorLevelActivatedEvent,
-  KmlMapEvent,
-  LongPressEvent,
   PanDragEvent,
-  PoiClickEvent,
   MapPressEvent,
   Details,
-  UserLocationChangeEvent,
   ChangeEvent,
   Address,
   BoundingBox,
@@ -33,7 +25,6 @@ import type {
   Point,
   Region,
   CalloutPressEvent,
-  ClickEvent,
   MarkerDragEvent,
   MarkerDragStartEndEvent,
   MarkerPressEvent,
@@ -93,41 +84,6 @@ export type MapViewProps = ViewProps & {
   initialRegion?: Region;
 
   /**
-   * Sets loading background color.
-   *
-   * @default `#FFFFFF`
-   */
-  loadingBackgroundColor?: string;
-
-  /**
-   * If `true` a loading indicator will show while the map is loading.
-   *
-   * @default false
-   */
-  loadingEnabled?: boolean;
-
-  /**
-   * Sets loading indicator color.
-   *
-   * @default `#606060`
-   */
-  loadingIndicatorColor?: string;
-
-  /**
-   * Adds custom padding to each side of the map. Useful when map elements/markers are obscured.
-   *
-   */
-  mapPadding?: EdgePadding;
-
-  /**
-   * The map type to be displayed
-   *
-   * @default `standard`
-   * hybrid | none | sattelite | standard | terrain
-   */
-  mapType?: MapType;
-
-  /**
    * Maximum zoom value for the map, must be between 0 and 20
    *
    * @default 20
@@ -145,8 +101,6 @@ export type MapViewProps = ViewProps & {
    * If `false` the map won't move to the marker when pressed.
    *
    * @default true
-   * @platform iOS: Not supported
-   * @platform Android: Supported
    */
   moveOnMarkerPress?: boolean;
 
@@ -155,42 +109,6 @@ export type MapViewProps = ViewProps & {
    *
    */
   onCalloutPress?: (event: CalloutPressEvent) => void;
-
-  /**
-   * Callback that is called when user double taps on the map.
-   *
-   */
-  onDoublePress?: (event: ClickEvent) => void;
-
-  /**
-   * Callback that is called when an indoor building is focused/unfocused
-   *
-   */
-  onIndoorBuildingFocused?: (event: IndoorBuildingEvent) => void;
-
-  /**
-   * Callback that is called when a level on indoor building is activated
-   *
-   */
-  onIndoorLevelActivated?: (event: IndoorLevelActivatedEvent) => void;
-
-  /**
-   * Callback that is called once the kml is fully loaded.
-   *
-   */
-  onKmlReady?: (event: KmlMapEvent) => void;
-
-  /**
-   * Callback that is called when user makes a "long press" somewhere on the map.
-   *
-   */
-  onLongPress?: (event: LongPressEvent) => void;
-
-  /**
-   * Callback that is called when the map has finished rendering all tiles.
-   *
-   */
-  onMapLoaded?: (event: NativeSyntheticEvent<{}>) => void;
 
   /**
    * Callback that is called once the map is ready.
@@ -233,12 +151,6 @@ export type MapViewProps = ViewProps & {
   onPanDrag?: (event: PanDragEvent) => void;
 
   /**
-   * Callback that is called when user click on a POI.
-   *
-   */
-  onPoiClick?: (event: PoiClickEvent) => void;
-
-  /**
    * Callback that is called when user taps on the map.
    *
    */
@@ -253,25 +165,9 @@ export type MapViewProps = ViewProps & {
 
   /**
    * Callback that is called once when the region changes, such as when the user is done moving the map.
-   * `isGesture` property indicates if the move was from the user (true) or an animation (false).
    *
    */
   onRegionChangeComplete?: (region: Region, details: Details) => void;
-
-  /**
-   * Callback that is called when the underlying map figures our users current location
-   * (coordinate also includes isFromMockProvider value for Android API 18 and above).
-   * Make sure **showsUserLocation** is set to *true*.
-   *
-   */
-  onUserLocationChange?: (event: UserLocationChangeEvent) => void;
-
-  /**
-   * If `false` the user won't be able to adjust the camera’s pitch angle.
-   *
-   * @default true
-   */
-  pitchEnabled?: boolean;
 
   /**
    * The region to be displayed by the map.
@@ -288,91 +184,11 @@ export type MapViewProps = ViewProps & {
   rotateEnabled?: boolean;
 
   /**
-   * If `false` the map will stay centered while rotating or zooming.
-   *
-   * @default true
-   */
-  scrollDuringRotateOrZoomEnabled?: boolean;
-
-  /**
    * If `false` the user won't be able to change the map region being displayed.
    *
    * @default true
    */
   scrollEnabled?: boolean;
-
-  /**
-   * A Boolean indicating whether the map displays extruded building information.
-   *
-   * @default true
-   */
-  showsBuildings?: boolean;
-
-  /**
-   * If `false` compass won't be displayed on the map.
-   *
-   * @default true
-   */
-  showsCompass?: boolean;
-
-  /**
-   * A Boolean indicating whether indoor level picker should be enabled.
-   *
-   * @default false
-   */
-  showsIndoorLevelPicker?: boolean;
-
-  /**
-   * A Boolean indicating whether indoor maps should be enabled.
-   *
-   * @default true
-   */
-  showsIndoors?: boolean;
-
-  /**
-   * If `false` hide the button to move map to the current user's location.
-   *
-   * @default true
-   */
-  showsMyLocationButton?: boolean;
-
-  /**
-   * If `true` the users location will be displayed on the map.
-   *
-   */
-  showsUserLocation?: boolean;
-
-  /**
-   * If `false` will hide 'Navigate' and 'Open in Maps' buttons on marker press
-   *
-   * @default true
-   */
-  toolbarEnabled?: boolean;
-
-  /**
-   * Fastest interval the application will actively acquire locations.
-   * @default 5000
-   */
-  userLocationFastestInterval?: number;
-
-  /**
-   * Set power priority of user location tracking.
-   * @default `high`
-   */
-  userLocationPriority?: 'balanced' | 'high' | 'low' | 'passive';
-
-  /**
-   * Interval of user location updates in milliseconds.
-   * @default 5000
-   */
-  userLocationUpdateInterval?: number;
-
-  /**
-   * If `false` the zoom control at the bottom right of the map won't be visible.
-   *
-   * @default true
-   */
-  zoomControlEnabled?: boolean;
 
   /**
    * If `false` the user won't be able to pinch/zoom the map.

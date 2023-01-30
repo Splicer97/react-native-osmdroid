@@ -98,32 +98,6 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     public void setInitialRegion(OsmMapView view, ReadableMap initialRegion) {
         view.setInitialRegion(initialRegion);
     }
-//
-//  @ReactProp(name = "mapType")
-//  public void setMapType(AirMapView view, @Nullable String mapType) {
-//    int typeId = MAP_TYPES.get(mapType);
-//    view.map.setMapType(typeId);
-//  }
-//
-//  @ReactProp(name = "customMapStyleString")
-//  public void setMapStyle(AirMapView view, @Nullable String customMapStyleString) {
-//    view.map.setMapStyle(new MapStyleOptions(customMapStyleString));
-//  }
-//
-//  @ReactProp(name = "showsUserLocation", defaultBoolean = false)
-//  public void setShowsUserLocation(AirMapView view, boolean showUserLocation) {
-//    view.setShowsUserLocation(showUserLocation);
-//  }
-//
-//  @ReactProp(name = "showsMyLocationButton", defaultBoolean = true)
-//  public void setShowsMyLocationButton(AirMapView view, boolean showMyLocationButton) {
-//    view.setShowsMyLocationButton(showMyLocationButton);
-//  }
-//
-//  @ReactProp(name = "toolbarEnabled", defaultBoolean = true)
-//  public void setToolbarEnabled(AirMapView view, boolean toolbarEnabled) {
-//    view.setToolbarEnabled(toolbarEnabled);
-//  }
 
     // This is a private prop to improve performance of panDrag by disabling it when the callback
     // is not set
@@ -131,30 +105,6 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     public void setHandlePanDrag(OsmMapView view, boolean handlePanDrag) {
         view.setHandlePanDrag(handlePanDrag);
     }
-
-//  @ReactProp(name = "showsTraffic", defaultBoolean = false)
-//  public void setShowTraffic(AirMapView view, boolean showTraffic) {
-//    view.map.setTrafficEnabled(showTraffic);
-//  }
-//
-//  @ReactProp(name = "showsBuildings", defaultBoolean = false)
-//  public void setShowBuildings(AirMapView view, boolean showBuildings) {
-//    view.map.setBuildingsEnabled(showBuildings);
-//  }
-//
-//  @ReactProp(name = "showsIndoors", defaultBoolean = false)
-//  public void setShowIndoors(AirMapView view, boolean showIndoors) {
-//    view.map.setIndoorEnabled(showIndoors);
-//  }
-//
-//  @ReactProp(name = "showsIndoorLevelPicker", defaultBoolean = false)
-//  public void setShowsIndoorLevelPicker(AirMapView view, boolean showsIndoorLevelPicker) {
-//    view.map.getUiSettings().setIndoorLevelPickerEnabled(showsIndoorLevelPicker);
-//  }
-//
-//  @ReactProp(name = "showsCompass", defaultBoolean = false)
-//  public void setShowsCompass(AirMapView view, boolean showsCompass) {
-//  }
 
     @ReactProp(name = "scrollEnabled", defaultBoolean = false)
     public void setScrollEnabled(OsmMapView view, boolean scrollEnabled) {
@@ -170,27 +120,11 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     public void setRotateEnabled(OsmMapView view, boolean rotateEnabled) {
         view.setRotateEnabled(rotateEnabled);
     }
-//
-//  @ReactProp(name = "loadingEnabled", defaultBoolean = false)
-//  public void setLoadingEnabled(AirMapView view, boolean loadingEnabled) {
-//    view.enableMapLoading(loadingEnabled);
-//  }
 
   @ReactProp(name = "moveOnMarkerPress", defaultBoolean = true)
   public void setMoveOnMarkerPress(OsmMapView view, boolean moveOnPress) {
     view.setMoveOnMarkerPress(moveOnPress);
   }
-
-//  @ReactProp(name = "loadingBackgroundColor", customType = "Color")
-//  public void setLoadingBackgroundColor(AirMapView view, @Nullable Integer
-// loadingBackgroundColor) {
-//    view.setLoadingBackgroundColor(loadingBackgroundColor);
-//  }
-//
-//  @ReactProp(name = "loadingIndicatorColor", customType = "Color")
-//  public void setLoadingIndicatorColor(AirMapView view, @Nullable Integer loadingIndicatorColor) {
-//    view.setLoadingIndicatorColor(loadingIndicatorColor);
-//  }
 
     @ReactProp(name = "minZoomLevel")
     public void setMinZoomLevel(OsmMapView view, float minZoomLevel) {
