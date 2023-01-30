@@ -41,7 +41,7 @@ type ModifiedProps = Modify<
 
 export type NativeProps = Omit<
   ModifiedProps,
-  'customMapStyle' | 'onRegionChange' | 'onRegionChangeComplete'
+  'onRegionChange' | 'onRegionChangeComplete'
 > & {
   ref: React.RefObject<MapViewNativeComponentType>;
   handlePanDrag?: boolean;
