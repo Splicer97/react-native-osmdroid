@@ -13,7 +13,6 @@ import type {
   Camera,
   PanDragEvent,
   MapPressEvent,
-  Details,
   ChangeEvent,
   Address,
   BoundingBox,
@@ -161,13 +160,13 @@ export type MapViewProps = ViewProps & {
    * `isGesture` property indicates if the move was from the user (true) or an animation (false).
    *
    */
-  onRegionChange?: (region: Region, details: Details) => void;
+  onRegionChange?: (region: Region) => void;
 
   /**
    * Callback that is called once when the region changes, such as when the user is done moving the map.
    *
    */
-  onRegionChangeComplete?: (region: Region, details: Details) => void;
+  onRegionChangeComplete?: (region: Region) => void;
 
   /**
    * The region to be displayed by the map.
@@ -240,15 +239,12 @@ class MapView extends React.Component<MapViewProps, State> {
   }
 
   private _onChange({ nativeEvent }: ChangeEvent) {
-    const isGesture = nativeEvent.isGesture;
-    const details = { isGesture };
-
     if (nativeEvent.continuous) {
       if (this.props.onRegionChange) {
-        this.props.onRegionChange(nativeEvent.region, details);
+        this.props.onRegionChange(nativeEvent.region);
       }
     } else if (this.props.onRegionChangeComplete) {
-      this.props.onRegionChangeComplete(nativeEvent.region, details);
+      this.props.onRegionChangeComplete(nativeEvent.region);
     }
   }
 
