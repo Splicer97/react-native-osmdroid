@@ -1,6 +1,7 @@
 # react-native-osmdroid [![npm version](https://img.shields.io/npm/v/@splicer97/react-native-osmdroid.svg?style=flat)](https://www.npmjs.com/package/@splicer97/react-native-osmdroid) [![Downloads](https://img.shields.io/npm/dm/@splicer97/react-native-osmdroid.svg)](http://www.npmtrends.com/@splicer97/react-native-osmdroid)
 
-This is unofficial React Native wrapper for osmdroid maps
+React Native Open Street Maps components for Android
+This is unofficial React Native wrapper for Osmdroid SDK
 
 ## Installation
 
@@ -51,14 +52,40 @@ osmdroid requires the following dangerous permissions:
 WRITE_EXTERNAL_STORAGE and ACCESS_COARSE_LOCATION/ACCESS_FINE_LOCATION.
 See [OpenStreetMapViewer's implementation](https://github.com/osmdroid/osmdroid/blob/master/OpenStreetMapViewer/src/main/java/org/osmdroid/MainActivity.java#L83) or [Google Documentation on Permissions](https://developer.android.com/training/permissions/requesting)
 
+## Component API
+
+[`<MapView />` Component API](docs/mapview.md)
+
+[`<Marker />` Component API](docs/marker.md)
+
+[`<Callout />` Component API](docs/callout.md)
+
+[`<Polygon />` Component API](docs/polygon.md)
+
+[`<Polyline />` Component API](docs/polyline.md)
+
+[`<Circle />` Component API](docs/circle.md)
+
+[`<Overlay />` Component API](docs/overlay.md)
+
+[`<Heatmap />` Component API](docs/heatmap.md)
+
+[`<Geojson />` Component API](docs/geojson.md)
+
 ## Usage
 
 ```js
-import { OsmdroidView } from 'react-native-osmdroid';
+import MapView from '@splicer97/react-native-osmdroid';
 
 // ...
-
-<OsmdroidView color="tomato" />;
+<MapView
+  initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }}
+/>;
 ```
 
 ## Contributing
