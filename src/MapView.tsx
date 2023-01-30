@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import type {
   Camera,
-  MapStyleElement,
   EdgePadding,
   MapType,
   IndoorBuildingEvent,
@@ -55,19 +54,11 @@ export type NativeProps = Omit<
   'customMapStyle' | 'onRegionChange' | 'onRegionChangeComplete'
 > & {
   ref: React.RefObject<MapViewNativeComponentType>;
-  customMapStyleString?: string;
   handlePanDrag?: boolean;
   onChange?: (e: ChangeEvent) => void;
 };
 
 export type MapViewProps = ViewProps & {
-  /**
-   * If `true` map will be cached and displayed as an image instead of being interactable, for performance usage.
-   *
-   * @default false
-   */
-  cacheEnabled?: boolean;
-
   /**
    * The camera view the map should display.
    *
@@ -75,11 +66,6 @@ export type MapViewProps = ViewProps & {
    * the pitch or heading. Using this will ignore the `region` property.
    */
   camera?: Camera;
-
-  /**
-   * Adds custom styling to the map component.
-   */
-  customMapStyle?: MapStyleElement[];
 
   /**
    * The initial camera view the map should use.  Use this prop instead of `camera`
@@ -105,12 +91,6 @@ export type MapViewProps = ViewProps & {
    *
    */
   initialRegion?: Region;
-
-  /**
-   * The URL for KML file.
-   *
-   */
-  kmlSrc?: string;
 
   /**
    * Sets loading background color.
@@ -662,9 +642,6 @@ class MapView extends React.Component<MapViewProps, State> {
         onChange: this._onChange,
         onMapReady: this._onMapReady,
         ref: this.map,
-        customMapStyleString: this.props.customMapStyle
-          ? JSON.stringify(this.props.customMapStyle)
-          : undefined,
         ...this.props,
       };
 
@@ -681,9 +658,6 @@ class MapView extends React.Component<MapViewProps, State> {
         onChange: this._onChange,
         onMapReady: this._onMapReady,
         onLayout: this.props.onLayout,
-        customMapStyleString: this.props.customMapStyle
-          ? JSON.stringify(this.props.customMapStyle)
-          : undefined,
       };
     }
 

@@ -170,11 +170,6 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     public void setRotateEnabled(OsmMapView view, boolean rotateEnabled) {
         view.setRotateEnabled(rotateEnabled);
     }
-
-//  @ReactProp(name = "cacheEnabled", defaultBoolean = false)
-//  public void setCacheEnabled(AirMapView view, boolean cacheEnabled) {
-//    view.setCacheEnabled(cacheEnabled);
-//  }
 //
 //  @ReactProp(name = "loadingEnabled", defaultBoolean = false)
 //  public void setLoadingEnabled(AirMapView view, boolean loadingEnabled) {
