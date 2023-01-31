@@ -1,8 +1,8 @@
 # react-native-osmdroid [![npm version](https://img.shields.io/npm/v/@splicer97/react-native-osmdroid.svg?style=flat)](https://www.npmjs.com/package/@splicer97/react-native-osmdroid) [![Downloads](https://img.shields.io/npm/dm/@splicer97/react-native-osmdroid.svg)](http://www.npmtrends.com/@splicer97/react-native-osmdroid)
 
-React Native Open Street Maps components for Android
-This is unofficial React Native wrapper for Osmdroid SDK
-
+React Native Open Street Maps components for Android.
+This is unofficial React Native wrapper for Osmdroid SDK.
+Many thanks to [fqborges](https://github.com/fqborges) for his [library](https://github.com/fqborges/react-native-maps-osmdroid), which is the basis of this library!
 ## Installation
 
 ```sh
