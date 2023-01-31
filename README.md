@@ -72,6 +72,8 @@ See [OpenStreetMapViewer's implementation](https://github.com/osmdroid/osmdroid/
 
 [`<Geojson />` Component API](docs/geojson.md)
 
+[`<URLTile />` and `<WMSTile />` Component API](docs/tiles.md)
+
 ## Usage
 
 ```js
