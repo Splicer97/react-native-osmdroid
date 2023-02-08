@@ -6,13 +6,13 @@ Many thanks to [fqborges](https://github.com/fqborges) for his [library](https:/
 ## Installation
 
 ```sh
-npm install react-native-osmdroid
+npm install @splicer97/react-native-osmdroid
 ```
 
 or
 
 ```sh
-yarn add react-native-osmdroid
+yarn add @splicer97/react-native-osmdroid
 ```
 
 ## Manifest
