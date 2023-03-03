@@ -99,7 +99,7 @@ export type MapViewProps = ViewProps & {
   /**
    * If `false` the map won't move to the marker when pressed.
    *
-   * @default true
+   * @default false
    */
   moveOnMarkerPress?: boolean;
 

@@ -57,7 +57,7 @@ public class OsmMapView extends MapView implements MapView.OnFirstLayoutListener
     private boolean isMonitoringRegion = false;
     private boolean isTouchDown = false;
     private boolean handlePanDrag = false;
-    private boolean moveOnMarkerPress = true;
+    private boolean moveOnMarkerPress = false;
     private boolean initialRegionSet = false;
 
     private final List<OsmMapFeature> features = new ArrayList<>();
