@@ -5,18 +5,7 @@ import type { NativeSyntheticEvent } from 'react-native';
 // use.
 
 export type Camera = {
-  /**
-   * Apple Maps
-   */
-  altitude?: number;
   center: LatLng;
-  heading: number;
-  pitch: number;
-
-  /**
-   * Google Maps
-   */
-  zoom?: number;
 };
 
 export type MapStyleElement = {

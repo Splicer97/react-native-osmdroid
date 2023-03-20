@@ -15,6 +15,8 @@ import com.facebook.react.uimanager.UIBlock;
 import com.facebook.react.uimanager.UIManagerModule;
 
 
+import org.osmdroid.api.IGeoPoint;
+
 import java.io.Closeable;
 import java.io.IOException;
 
@@ -132,39 +134,34 @@ public class OsmMapModule extends ReactContextBaseJavaModule {
 //    });
 //  }
 
-//  @ReactMethod
-//  public void getCamera(final int tag, final Promise promise) {
-//    final ReactApplicationContext context = getReactApplicationContext();
-//
-//    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
-//    uiManager.addUIBlock(new UIBlock()
-//    {
-//      @Override
-//      public void execute(NativeViewHierarchyManager nvhm)
-//      {
-//        OsmMapView view = (OsmMapView) nvhm.resolveView(tag);
-//        if (view == null) {
-//          promise.reject("AirMapView not found");
-//          return;
-//        }
-//
-//
-//        CameraPosition position = view.map.getCameraPosition();
-//
-//        WritableMap centerJson = new WritableNativeMap();
-//        centerJson.putDouble("latitude", position.target.latitude);
-//        centerJson.putDouble("longitude", position.target.longitude);
-//
-//        WritableMap cameraJson = new WritableNativeMap();
-//        cameraJson.putMap("center", centerJson);
-//        cameraJson.putDouble("heading", (double)position.bearing);
-//        cameraJson.putDouble("zoom", (double)position.zoom);
-//        cameraJson.putDouble("pitch", (double)position.tilt);
-//
-//        promise.resolve(cameraJson);
-//      }
-//    });
-//  }
+ @ReactMethod
+ public void getCamera(final int tag, final Promise promise) {
+   final ReactApplicationContext context = getReactApplicationContext();
+
+   UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
+   uiManager.addUIBlock(new UIBlock()
+   {
+     @Override
+     public void execute(NativeViewHierarchyManager nvhm)
+     {
+       OsmMapView view = (OsmMapView) nvhm.resolveView(tag);
+       if (view == null) {
+         promise.reject("AirMapView not found", "AirMapView not found");
+         return;
+       }
+
+       IGeoPoint position = view.getCameraPosition();
+
+       WritableMap centerJson = new WritableNativeMap();
+       centerJson.putDouble("latitude", position.getLatitude());
+       centerJson.putDouble("longitude", position.getLongitude());
+
+       WritableMap cameraJson = new WritableNativeMap();
+       cameraJson.putMap("center", centerJson);
+       promise.resolve(cameraJson);
+     }
+   });
+ }
 
 //  @ReactMethod
 //  public void pointForCoordinate(final int tag, ReadableMap coordinate, final Promise promise) {
@@ -253,7 +250,7 @@ public class OsmMapModule extends ReactContextBaseJavaModule {
       public void execute(NativeViewHierarchyManager nvhm) {
         OsmMapView view = (OsmMapView) nvhm.resolveView(tag);
         if (view == null) {
-          promise.reject("AirMapView not found");
+          promise.reject("AirMapView not found", "AirMapView not found");
           return;
         }
 

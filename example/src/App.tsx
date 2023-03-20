@@ -35,6 +35,13 @@ export default function App() {
         ref={mapRef}
         style={styles.container}
         initialRegion={initialRegion}
+        onRegionChange={async () => {
+          const camera = await mapRef.current?.getCamera();
+          console.log(
+            '🚀 ~ file: App.tsx:40 ~ onRegionChange={ ~ camera:',
+            camera
+          );
+        }}
       >
         <Marker
           coordinate={{

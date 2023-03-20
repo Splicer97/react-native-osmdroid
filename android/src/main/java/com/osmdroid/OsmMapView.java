@@ -524,6 +524,11 @@ public class OsmMapView extends MapView implements MapView.OnFirstLayoutListener
       {bounds.getLonWest(), bounds.getLatSouth()}
     };
   }
+  public IGeoPoint getCameraPosition() {
+    OsmMapView mapView = OsmMapView.this;
+    IGeoPoint pos = mapView.getMapCenter();
+    return pos;
+  }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
