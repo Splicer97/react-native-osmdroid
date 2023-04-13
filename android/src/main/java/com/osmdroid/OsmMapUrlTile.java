@@ -80,12 +80,12 @@ public class OsmMapUrlTile extends OsmMapFeature {
   public void addToMap(MapView map) {
     final ITileSource tileSource = new OsmMapTileSource( "OsmMapTileSource", (int)minimumZ, (int)maximumZ, 256, urlTemplate);
     map.setTileSource(tileSource);
-    map.setTilesScaledToDpi(false);
+    // map.setTilesScaledToDpi(false);
   }
 
   @Override
   public void removeFromMap(MapView map) {
     map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-    map.setTilesScaledToDpi(false);
+    // map.setTilesScaledToDpi(false);
   }
 }

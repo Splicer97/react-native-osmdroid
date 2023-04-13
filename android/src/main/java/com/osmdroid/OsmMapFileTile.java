@@ -42,12 +42,12 @@ public class OsmMapFileTile extends OsmMapFeature {
   @Override public void addToMap(MapView map) {
     setupMapProvider(map);
     map.setUseDataConnection(false);
-    map.setTilesScaledToDpi(false);
+    // map.setTilesScaledToDpi(false);
   }
 
   @Override public void removeFromMap(MapView map) {
     map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-    map.setTilesScaledToDpi(false);
+    // map.setTilesScaledToDpi(false);
   }
 
   @Override public Object getFeature() {

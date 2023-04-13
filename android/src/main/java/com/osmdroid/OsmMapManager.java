@@ -48,6 +48,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
         final String packageName = context.getApplicationContext().getApplicationInfo().packageName;
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         Configuration.getInstance().setUserAgentValue(packageName);
+        Configuration.getInstance().setTileDownloadThreads((short) 12);
     }
 
     void invalidateNode(final OsmMapView view) {
