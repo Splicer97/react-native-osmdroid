@@ -111,7 +111,7 @@ public class OsmMapView extends MapView implements MapView.OnFirstLayoutListener
 
         eventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
         this.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-        this.setTilesScaledToDpi(true);
+        this.setTilesScaledToDpi(false);
         this.setTilesScaleFactor(1);
         this.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
     }
