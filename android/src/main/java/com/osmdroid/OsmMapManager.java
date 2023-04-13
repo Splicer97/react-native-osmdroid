@@ -99,7 +99,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     view.setInitialRegion(initialRegion);
   }
 
-  @ReactProp(name = "tileDownloadThreads")
+  @ReactProp(name = "tileDownloadThreads", defaultFloat = 2)
   public void setTileDownloadThreads(OsmMapView view, float tileDownloadThread) {
     Configuration.getInstance().setTileDownloadThreads((short) tileDownloadThread);
   }
