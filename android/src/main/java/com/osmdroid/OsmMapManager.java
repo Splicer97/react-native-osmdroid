@@ -48,6 +48,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     final String packageName = context.getApplicationContext().getApplicationInfo().packageName;
     Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
     Configuration.getInstance().setUserAgentValue(packageName);
+    Configuration.getInstance().setTileDownloadThreads((short) 12);
   }
 
   void invalidateNode(final OsmMapView view) {
@@ -99,7 +100,7 @@ public class OsmMapManager extends ViewGroupManager<OsmMapView> {
     view.setInitialRegion(initialRegion);
   }
 
-  @ReactProp(name = "tileDownloadThreads", defaultFloat = 2)
+  @ReactProp(name = "tileDownloadThreads", defaultFloat = 12)
   public void setTileDownloadThreads(OsmMapView view, float tileDownloadThread) {
     Configuration.getInstance().setTileDownloadThreads((short) tileDownloadThread);
   }

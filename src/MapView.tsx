@@ -52,9 +52,7 @@ export type MapViewProps = ViewProps & {
   /**
    * Number of tile download threads.
    *
-   * Conforming to OSM policy: http://wiki.openstreetmap.org/wiki/Tile_usage_policy default is 2.
-   *
-   * @default 2
+   * @default 12
    *
    * @minimum 1
    *
