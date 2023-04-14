@@ -78,11 +78,8 @@ repositories {
 
 
 dependencies {
-  // For < 0.71, this will be from the local maven repo
-  // For > 0.71, this will be replaced by `com.facebook.react:react-android:$version` by react gradle plugin
-  //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
-  implementation "org.osmdroid:osmdroid-android:6.1.13"
+  implementation "org.osmdroid:osmdroid-android:6.1.16"
 }
 
 if (isNewArchitectureEnabled()) {
