@@ -65,9 +65,5 @@ public class OsmMapCircleManager extends ViewGroupManager<OsmMapCircle> {
     view.setStrokeColor(color);
   }
 
-//  @ReactProp(name = "zIndex", defaultFloat = 1.0f)
-//  public void setZIndex(OSMMapCircle view, float zIndex) {
-//    view.setZIndex(zIndex);
-//  }
 
 }

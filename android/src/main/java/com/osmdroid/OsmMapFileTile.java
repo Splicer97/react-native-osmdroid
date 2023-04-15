@@ -17,16 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Allows to use offline tile source
- *
- * - Put zip file(s) in internal memory: /data/data/{packageName}/files/offline_tiles/
- * - Internal file subdirectory (offline_tiles) may be changed with setFileDirPath or fileDirPath in
- * js.
- * - Every zip must have same root directory, with same name as others: {ROOT_DIR_NAME}/z/X/Y
- * - Remember to remove hidden os related garbage (like .DS_Store etc.) before creating zip
- * - Zip files may have any name
- */
 public class OsmMapFileTile extends OsmMapFeature {
 
   private final static String TAG = "OsmMapFileTile";
@@ -42,12 +32,10 @@ public class OsmMapFileTile extends OsmMapFeature {
   @Override public void addToMap(MapView map) {
     setupMapProvider(map);
     map.setUseDataConnection(false);
-    // map.setTilesScaledToDpi(false);
   }
 
   @Override public void removeFromMap(MapView map) {
     map.setTileSource(TileSourceFactory.DEFAULT_TILE_SOURCE);
-    // map.setTilesScaledToDpi(false);
   }
 
   @Override public Object getFeature() {

@@ -5,17 +5,17 @@ import org.osmdroid.util.GeoPoint;
 
 public class LatLngBoundsUtils {
     public static boolean BoundsAreDifferent(BoundingBox a, BoundingBox b) {
-        GeoPoint centerA = a.getCenter();
+        GeoPoint centerA = a.getCenterWithDateLine();
         double latA = centerA.getLatitude();
         double lngA = centerA.getLongitude();
         double latDeltaA = a.getLatitudeSpan();
-        double lngDeltaA = a.getLongitudeSpan();
+        double lngDeltaA = a.getLongitudeSpanWithDateLine();
 
-        GeoPoint centerB = b.getCenter();
+        GeoPoint centerB = b.getCenterWithDateLine();
         double latB = centerB.getLatitude();
         double lngB = centerB.getLongitude();
         double latDeltaB = b.getLatitudeSpan();
-        double lngDeltaB = b.getLongitudeSpan();
+        double lngDeltaB = b.getLongitudeSpanWithDateLine();
 
         double latEps = LatitudeEpsilon(a, b);
         double lngEps = LongitudeEpsilon(a, b);
@@ -39,8 +39,8 @@ public class LatLngBoundsUtils {
     }
 
     private static double LongitudeEpsilon(BoundingBox a, BoundingBox b) {
-        double sizeA = a.getLongitudeSpan();
-        double sizeB = b.getLongitudeSpan();
+        double sizeA = a.getLongitudeSpanWithDateLine();
+        double sizeB = b.getLongitudeSpanWithDateLine();
         double size = Math.min(Math.abs(sizeA), Math.abs(sizeB));
         return size / 2560;
     }

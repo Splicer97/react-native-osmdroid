@@ -32,10 +32,15 @@ export default function App() {
   return (
     <View style={{ flex: 1, position: 'relative' }}>
       <MapView.Animated
-        // tileDownloadThreads={12}
         ref={mapRef}
         style={styles.container}
         initialRegion={initialRegion}
+        onRegionChange={(event) => {
+          console.log('🚀 ~ file: App.tsx:117 ~ App ~ onRegionChange:', event);
+        }}
+        onRegionChangeComplete={(event) => {
+          console.log('🚀 ~ file: App.tsx:117 ~ App ~ onRegionChange:', event);
+        }}
       >
         <Marker
           coordinate={{

@@ -1,5 +1,7 @@
 package com.osmdroid;
 
+import androidx.annotation.NonNull;
+
 import com.osmdroid.utils.SizeReportingShadowNode;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.LayoutShadowNode;
@@ -19,7 +21,7 @@ public class OsmMapCalloutManager extends ViewGroupManager<OsmMapCallout> {
     }
 
     @Override
-    public OsmMapCallout createViewInstance(ThemedReactContext context) {
+    public OsmMapCallout createViewInstance(@NonNull ThemedReactContext context) {
         return new OsmMapCallout(context);
     }
 
