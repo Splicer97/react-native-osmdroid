@@ -39,7 +39,7 @@ public class OsmRegionChangeEvent extends Event<OsmRegionChangeEvent> {
     region.putDouble("latitude", center.getLatitude());
     region.putDouble("longitude", center.getLongitude());
     region.putDouble("latitudeDelta", bounds.getLatitudeSpan());
-    region.putDouble("longitudeDelta", bounds.getLongitudeSpan());
+    region.putDouble("longitudeDelta", bounds.getLongitudeSpanWithDateLine());
     event.putMap("region", region);
 
     rctEventEmitter.receiveEvent(getViewTag(), getEventName(), event);
