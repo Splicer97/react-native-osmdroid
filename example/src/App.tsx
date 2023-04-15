@@ -61,7 +61,7 @@ export default function App() {
           coordinates={[
             {
               latitude: 55.7521,
-              longitude: 37.60556,
+              longitude: 37.18139,
             },
             {
               latitude: 55.75223,
@@ -70,6 +70,10 @@ export default function App() {
             {
               latitude: 55.75224,
               longitude: 37.61558,
+            },
+            {
+              latitude: 45.75224,
+              longitude: 33.61558,
             },
           ]}
         />
@@ -92,13 +96,13 @@ export default function App() {
           ]}
         />
         <Circle
-          strokeWidth={40}
-          strokeColor="white"
+          strokeWidth={100}
+          strokeColor="green"
           center={{
             latitude: 55.72324,
             longitude: 37.62358,
           }}
-          radius={40}
+          radius={100}
         />
         <UrlTile urlTemplate={toner} />
       </MapView.Animated>

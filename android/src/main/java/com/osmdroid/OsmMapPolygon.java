@@ -20,8 +20,6 @@ public class OsmMapPolygon extends OsmMapFeature {
   private int strokeColor;
   private int fillColor;
   private float strokeWidth;
-  private boolean geodesic;
-  private float zIndex;
   private MapView mapView;
 
   public OsmMapPolygon(Context context) {
@@ -46,7 +44,7 @@ public class OsmMapPolygon extends OsmMapFeature {
   public void setFillColor(int color) {
     this.fillColor = color;
     if (polygon != null) {
-      polygon.setFillColor(color);
+      polygon.getFillPaint().setColor(color);
       mapView.invalidate();
     }
   }
@@ -54,7 +52,7 @@ public class OsmMapPolygon extends OsmMapFeature {
   public void setStrokeColor(int color) {
     this.strokeColor = color;
     if (polygon != null) {
-      polygon.setStrokeColor(color);
+      polygon.getOutlinePaint().setColor(color);
       mapView.invalidate();
     }
   }
@@ -62,24 +60,11 @@ public class OsmMapPolygon extends OsmMapFeature {
   public void setStrokeWidth(float width) {
     this.strokeWidth = width;
     if (polygon != null) {
-      polygon.setStrokeWidth(width);
+      polygon.getOutlinePaint().setStrokeWidth(width);
       mapView.invalidate();
     }
   }
 
-//  public void setGeodesic(boolean geodesic) {
-//    this.geodesic = geodesic;
-//    if (polygon != null) {
-//      polygon.setGeodesic(geodesic);
-//    }
-//  }
-
-//  public void setZIndex(float zIndex) {
-//    this.zIndex = zIndex;
-//    if (polygon != null) {
-//      polygon.setZIndex(zIndex);
-//    }
-//  }
 
   @Override
   public Object getFeature() {
@@ -91,9 +76,9 @@ public class OsmMapPolygon extends OsmMapFeature {
     polygon = new Polygon();
     mapView = map;
     polygon.setPoints(coordinates);
-    polygon.setFillColor(fillColor);
-    polygon.setStrokeColor(strokeColor);
-    polygon.setStrokeWidth(strokeWidth);
+    polygon.getFillPaint().setColor(fillColor);
+    polygon.getOutlinePaint().setColor(strokeColor);
+    polygon.getOutlinePaint().setStrokeWidth(strokeWidth);
     map.getOverlays().add(polygon);
     mapView.invalidate();
   }

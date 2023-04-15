@@ -15,7 +15,6 @@ public class OsmMapCircle extends OsmMapFeature {
   private int strokeColor;
   private int fillColor;
   private float strokeWidth;
-  private float zIndex;
   private MapView mapView;
 
   public OsmMapCircle(Context context) {
@@ -39,7 +38,7 @@ public class OsmMapCircle extends OsmMapFeature {
   public void setFillColor(int color) {
     this.fillColor = color;
     if (polygon != null) {
-      polygon.setFillColor(color);
+      polygon.getFillPaint().setColor(color);
       mapView.invalidate();
     }
   }
@@ -47,7 +46,7 @@ public class OsmMapCircle extends OsmMapFeature {
   public void setStrokeColor(int color) {
     this.strokeColor = color;
     if (polygon != null) {
-      polygon.setStrokeColor(color);
+      polygon.getOutlinePaint().setColor(color);
       mapView.invalidate();
     }
   }
@@ -55,17 +54,10 @@ public class OsmMapCircle extends OsmMapFeature {
   public void setStrokeWidth(float width) {
     this.strokeWidth = width;
     if (polygon != null) {
-      polygon.setStrokeWidth(width);
+      polygon.getOutlinePaint().setStrokeWidth(width);
       mapView.invalidate();
     }
   }
-
-//  public void setZIndex(float zIndex) {
-//    this.zIndex = zIndex;
-//    if (circle != null) {
-//      circle.setZIndex(zIndex);
-//    }
-//  }
 
   @Override
   public Object getFeature() {
@@ -77,9 +69,9 @@ public class OsmMapCircle extends OsmMapFeature {
     polygon = new Polygon();
     mapView = map;
     polygon.setPoints(Polygon.pointsAsCircle(center, radius));
-    polygon.setFillColor(fillColor);
-    polygon.setStrokeColor(strokeColor);
-    polygon.setStrokeWidth(strokeWidth);
+    polygon.getFillPaint().setColor(fillColor);
+    polygon.getOutlinePaint().setColor(strokeColor);
+    polygon.getOutlinePaint().setStrokeWidth(strokeWidth);
     map.getOverlays().add(polygon);
     mapView.invalidate();
   }

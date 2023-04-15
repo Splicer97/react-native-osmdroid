@@ -43,7 +43,7 @@ public class OsmMapPolyline extends OsmMapFeature {
   public void setColor(int color) {
     this.color = color;
     if (polyline != null) {
-      polyline.setColor(color);
+      polyline.getOutlinePaint().setColor(color);
       mapView.invalidate();
     }
   }
@@ -51,18 +51,11 @@ public class OsmMapPolyline extends OsmMapFeature {
   public void setWidth(float width) {
     this.width = width;
     if (polyline != null) {
-      polyline.setWidth(width);
+      polyline.getOutlinePaint().setStrokeWidth(width);
       mapView.invalidate();
     }
   }
 
-//  public void setZIndex(float zIndex) {
-//    this.zIndex = zIndex;
-//    if (polyline != null) {
-//      polyline.setZIndex(zIndex);
-//    }
-//  }
-//
   public void setGeodesic(boolean geodesic) {
     this.geodesic = geodesic;
     if (polyline != null) {
@@ -81,8 +74,8 @@ public class OsmMapPolyline extends OsmMapFeature {
     polyline = new Polyline();
     mapView = map;
     polyline.setPoints(coordinates);
-    polyline.setColor(color);
-    polyline.setWidth(width);
+    polyline.getOutlinePaint().setColor(color);
+    polyline.getOutlinePaint().setStrokeWidth(width);
     polyline.setGeodesic(geodesic);
     mapView.getOverlayManager().add(polyline);
     mapView.invalidate();

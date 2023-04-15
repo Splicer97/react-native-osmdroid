@@ -63,15 +63,6 @@ public class OsmMapPolygonManager extends ViewGroupManager<OsmMapPolygon> {
     view.setStrokeColor(color);
   }
 
-//  @ReactProp(name = "geodesic", defaultBoolean = false)
-//  public void setGeodesic(AirMapPolygon view, boolean geodesic) {
-//    view.setGeodesic(geodesic);
-//  }
-//
-//  @ReactProp(name = "zIndex", defaultFloat = 1.0f)
-//  public void setZIndex(AirMapPolygon view, float zIndex) {
-//    view.setZIndex(zIndex);
-//  }
 
   @Override
   @Nullable

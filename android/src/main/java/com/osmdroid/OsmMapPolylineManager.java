@@ -25,8 +25,8 @@ public class OsmMapPolylineManager extends ViewGroupManager<OsmMapPolyline> {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
       metrics = new DisplayMetrics();
       ((WindowManager) reactContext.getSystemService(Context.WINDOW_SERVICE))
-          .getDefaultDisplay()
-          .getRealMetrics(metrics);
+        .getDefaultDisplay()
+        .getRealMetrics(metrics);
     } else {
       metrics = reactContext.getResources().getDisplayMetrics();
     }
@@ -63,16 +63,12 @@ public class OsmMapPolylineManager extends ViewGroupManager<OsmMapPolyline> {
     view.setGeodesic(geodesic);
   }
 
-//  @ReactProp(name = "zIndex", defaultFloat = 1.0f)
-//  public void setZIndex(AirMapPolyline view, float zIndex) {
-//    view.setZIndex(zIndex);
-//  }
 
   @Override
   @Nullable
   public Map getExportedCustomDirectEventTypeConstants() {
     return MapBuilder.of(
-        "onPress", MapBuilder.of("registrationName", "onPress")
+      "onPress", MapBuilder.of("registrationName", "onPress")
     );
   }
 }
