@@ -1,6 +1,6 @@
 {
   "name": "@splicer97/react-native-osmdroid",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "This is unofficial React Native wrapper for osmdroid maps",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
