@@ -79,7 +79,7 @@ repositories {
 
 dependencies {
   implementation "com.facebook.react:react-native:+"
-  implementation "org.osmdroid:osmdroid-android:6.1.16"
+  implementation "org.osmdroid:osmdroid-android:6.1.17"
 }
 
 if (isNewArchitectureEnabled()) {
