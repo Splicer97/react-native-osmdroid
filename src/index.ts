@@ -3,7 +3,7 @@ export type { MapViewProps };
 import Marker from './MapMarker';
 import Polyline from './MapPolyline';
 import Polygon from './MapPolygon';
-export type { MapPolylineProps } from './MapPolyline';
+export type { MapPolylineProps, PolylinePressEvent } from './MapPolyline';
 export type { MapPolygonProps } from './MapPolygon';
 export { default as Callout } from './MapCallout';
 export type { MapCalloutProps } from './MapCallout';

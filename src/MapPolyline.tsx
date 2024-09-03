@@ -76,7 +76,7 @@ export type MapPolylineProps = ViewProps & {
   tappable?: boolean;
 };
 
-type PolylinePressEvent = NativeSyntheticEvent<{
+export type PolylinePressEvent = NativeSyntheticEvent<{
   action: 'polyline-press';
   id?: string;
   coordinate?: LatLng;
